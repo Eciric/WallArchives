@@ -1,17 +1,22 @@
 const express = require("express");
 const router = require("../server/routers/wall-router");
+const cors = require("cors");
+require("dotenv").config();
+
+let corsOrigin = {
+  origin: process.env.FRONTEND_URL,
+};
+
 const app = express();
-const port = 3002;
+
+app.use(cors(corsOrigin));
 
 app.use(router);
 
 app.get("/", (req, res) => {
-  res.send({
-    a: "hello",
-    b: "world",
-  });
+  res.json({ msg: "This is CORS-enabled for a Single Route" });
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${port}`);
 });
