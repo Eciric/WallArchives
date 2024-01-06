@@ -1,0 +1,25 @@
+.wrapper {
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 98%;
+}
+
+.img-wrapper {
+  width: 400px;
+  height: fit-content;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.auto-width {
+  flex: 1 0 auto;
+}
