@@ -9,13 +9,15 @@ let corsOrigin = {
 };
 const PORT = process.env.PORT;
 const app = express();
-app.use(express.static(path.join(__dirname, "..") + "/public"));
+
 app.use(cors(corsOrigin));
+
+app.use(express.static(path.join(__dirname, "..") + "/public"));
 
 app.use(router);
 
 app.get("/", (req, res) => {
-  res.json({ msg: "This is CORS-enabled for a Single Route" });
+  res.json({ msg: "This is  a  Route" });
 });
 
 app.listen(PORT, () => {
