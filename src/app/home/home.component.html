@@ -1,7 +1,7 @@
 <app-navigation></app-navigation>
 
-<div class="wrapper">
-  <div *ngFor="let _ of [].constructor(10)" class="img-wrapper auto-width">
-    <img [src]="imageURL" alt="Image2" />
+<div class="flex flex-wrap mt-24 w-11/12 mx-auto h-100 gap-3">
+  <div *ngFor="let image of imageURLS" class="img-wrapper">
+    <img [src]="api + '/' + image" alt="Image" />
   </div>
 </div>
