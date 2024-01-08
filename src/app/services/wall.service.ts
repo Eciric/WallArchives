@@ -8,9 +8,7 @@ import { Observable, map } from 'rxjs';
 export class WallService {
   constructor(private http: HttpClient) {}
 
-  fetchTestImage(): Observable<Blob> {
-    return this.http.get('http://localhost:3002/uploads/test.png', {
-      responseType: 'blob',
-    });
+  fetchAllImages(): Observable<any> {
+    return this.http.get('http://localhost:3002/walls');
   }
 }
