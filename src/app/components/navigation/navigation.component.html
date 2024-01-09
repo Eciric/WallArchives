@@ -1,5 +1,7 @@
 <header class="flex w-11/12 mx-auto py-6 text-white">
-  <a href="#" class="mr-24 py-3 text-lg font-bold">WallArchives</a>
+  <a href="#" class="mr-24 py-3 text-lg font-bold" routerLink="/"
+    >WallArchives</a
+  >
   <nav class="flex w-full justify-between">
     <ul class="flex gap-12 py-3" role="list">
       <li class="hover:cursor-pointer">Explore</li>
@@ -10,6 +12,7 @@
     <ul class="flex gap-12 pl-12" role="list">
       <li class="hover:cursor-pointer">
         <button
+          routerLink="/sign-in"
           class="flex justify-center items-center bg-gray-500 hover:bg-gray-700 font-bold py-3 px-6 rounded-lg"
         >
           <i class="fa fa-pencil mr-2" aria-hidden="true"></i> Sign in
@@ -17,6 +20,7 @@
       </li>
       <li class="hover:cursor-pointer">
         <button
+          routerLink="/sign-up"
           class="flex justify-center items-center bg-blue-500 hover:bg-blue-900 font-bold py-3 px-6 rounded-lg"
         >
           <i class="fa fa-sign-in mr-2" aria-hidden="true"></i> Sign up
