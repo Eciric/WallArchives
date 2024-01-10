@@ -1,2 +1,34 @@
 <app-navigation></app-navigation>
-<h1>signin</h1>
+<div class="w-full sm:mt-8 lg:mt-24 flex justify-center items-center">
+  <form
+    class="w-1/3 flex flex-col gap-4 bg-violet-800 rounded-lg px-24 py-12 shadow-lg shadow-violet-600/30 text-center"
+  >
+    <h1 class="text-lg font-semibold text-white">Sign in to WallArchives!</h1>
+    <p class="text-md text-white text-opacity-75 mb-6 text-center">
+      Sign in to access features available only to users.
+    </p>
+    <label for="email" class="text-white">Your email</label>
+    <input
+      name="email"
+      type="email"
+      placeholder="email@email.com..."
+      class="w-full p-2 text-white bg-violet-900 shadow-lg"
+    />
+    <label for="password" class="text-white">Your password</label>
+    <input
+      name="password"
+      type="password"
+      placeholder="Password..."
+      class="w-full p-2 text-white bg-violet-900 shadow-lg"
+    />
+    <button
+      type="submit"
+      class="mt-4 py-4 px-8 w-fit m-auto rounded-lg text-white bg-violet-900 hover:bg-violet-950"
+    >
+      Sign in
+    </button>
+    <a href="/sign-up" class="m-auto text-white underline hover:text-violet-300"
+      >Don't have an account yet? Sign up instead.</a
+    >
+  </form>
+</div>
