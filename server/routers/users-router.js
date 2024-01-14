@@ -57,8 +57,10 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  req.logout();
-  res.status(200).send();
+  req.logout((err) => {
+    if (err) res.status(500).send(err);
+    else res.status(200).send();
+  });
 });
 
 module.exports = router;
