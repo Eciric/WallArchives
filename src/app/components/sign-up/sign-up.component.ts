@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
-import { UserResponse } from 'src/app/interfaces/user-response';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -12,8 +12,9 @@ import { UserService } from 'src/app/services/user/user.service';
 export class SignUpComponent implements OnInit {
   formGroup!: FormGroup;
   user: User = {} as User;
+  isDisabled = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -30,6 +31,7 @@ export class SignUpComponent implements OnInit {
   }
 
   createNewUser(): void {
+    this.isDisabled = true;
     this.userService
       .createUser({
         email: this.formGroup.get('email')?.value,
@@ -37,14 +39,17 @@ export class SignUpComponent implements OnInit {
         password: this.formGroup.get('password')?.value,
       })
       .subscribe({
-        next: (response: UserResponse) => {
+        next: (response: any) => {
           console.log(response);
+          console.log(response?.headers);
+          this.userService.setSessionInfo(response.headers.get('session'));
+          this.router.navigate(['/']);
         },
         error: (e: Error) => {
-          console.log(e);
+          console.log('Error:', e);
         },
         complete: () => {
-          console.log('user creation call completed');
+          this.isDisabled = false;
         },
       });
   }
