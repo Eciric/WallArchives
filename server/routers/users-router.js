@@ -1,66 +1,85 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
-const passport = require("passport");
+const bcrypt = require("bcryptjs");
+const uuid = require("uuid").v4;
+const { ensureAuthenticated } = require("../config/auth");
+router.post("/users", async (req, res) => {
+  const { email, username, password } = req.body;
+  if (!email || !username || !password) {
+    res.status(500).send({ error: "All fields are required!" });
+    return;
+  }
 
-passport.use(User.createStrategy());
+  if (password.length < 8) {
+    res
+      .status(500)
+      .send({ error: "Password needs to be at least 8 characters" });
+    return;
+  }
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    res.status(500).send({ error: "Email already exists" });
+    return;
+  }
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
+  const newUser = new User({
+    username,
+    email,
+    password,
+  });
+
+  const salt = await bcrypt.genSalt(10);
+  bcrypt.hash(newUser.password, salt, (err, hash) => {
+    if (err) {
+      res.status(500).send({ msg: "Failed to hash password" });
+      return;
+    }
+    const session_id = uuid();
+    newUser.session = session_id;
+    newUser.password = hash;
+    newUser
+      .save()
+      .then(() => {
+        res.cookie("session", session_id);
+        res.status(200).send();
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send({ msg: "Failed to create user" });
+      });
   });
 });
 
-router.post("/users", async (req, res) => {
-  try {
-    const registerUser = await User.register(
-      {
-        email: req.body.email,
-        username: req.body.username,
-        dateCreated: Date.now(),
-      },
-      req.body.password
-    );
-    if (registerUser) {
-      passport.authenticate("local")(req, res, () => {
-        res.status(200).send(req.body);
-      });
+router.post("/sign-in", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (user) {
+    const correctPwd = bcrypt.compareSync(password, user.password);
+    if (correctPwd) {
+      const session_id = uuid();
+      user.session = session_id;
+      user
+        .save()
+        .then(() => {
+          res.cookie("session", session_id);
+          res.status(200).send();
+        })
+        .catch(() => {
+          res.status(500).send({ error: "Failed to authenticate" });
+        });
     } else {
-      res.status(500).send(req.body);
+      res.status(401).send({ error: "Incorrect credentials" });
     }
-  } catch (err) {
-    console.log(err);
-    res.send(err);
+  } else {
+    res.status(401).send({ error: "Incorrect credentials" });
   }
 });
 
-router.post("/login", (req, res) => {
-  const user = new User({
-    email: req.body.email,
-    passwowrd: req.body.email,
-  });
-
-  req.login(user, (err) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send();
-    } else {
-      passport.authenticate("local")(req, res, () => {
-        res.status(200).send();
-      });
-    }
-  });
-});
-
-router.get("/logout", (req, res) => {
-  req.logout((err) => {
-    if (err) res.status(500).send(err);
-    else res.status(200).send();
-  });
+router.get("/sign-out", ensureAuthenticated, (req, res) => {
+  res.clearCookie("session");
+  res.status(200).send();
 });
 
 module.exports = router;
