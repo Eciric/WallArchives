@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -27,9 +28,9 @@
     "nodemon": "^3.0.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^8.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "uuid": "^9.0.1",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
