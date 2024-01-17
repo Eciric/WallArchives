@@ -41,7 +41,7 @@ export class SignUpComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           console.log(response);
-          console.log(response?.headers);
+          console.log(response?.headers.get('session'));
           this.userService.setSessionInfo(response.headers.get('session'));
           this.router.navigate(['/']);
         },

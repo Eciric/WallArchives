@@ -9,13 +9,12 @@ const usersRouter = require("../server/routers/users-router");
 const PORT = process.env.PORT;
 
 const app = express();
-
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
+    credentials: true,
   })
 );
-
 app.use(express.static(path.join(__dirname, "..") + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

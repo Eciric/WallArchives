@@ -32,12 +32,17 @@ export class UserService {
   }
 
   logout(): Observable<any> {
-    return this.http.get('http://localhost:3002/sign-out');
+    let session = localStorage.getItem('session') || '';
+    return this.http.get('http://localhost:3002/sign-out', {
+      headers: new HttpHeaders({ session }),
+    });
   }
 
   createUser(newUser: User): Observable<any> {
     return this.http.post('http://localhost:3002/users', newUser, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       observe: 'response',
+      withCredentials: true,
     });
   }
 

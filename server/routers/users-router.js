@@ -4,6 +4,7 @@ const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const uuid = require("uuid").v4;
 const { ensureAuthenticated } = require("../config/auth");
+
 router.post("/users", async (req, res) => {
   const { email, username, password } = req.body;
   if (!email || !username || !password) {
@@ -42,7 +43,8 @@ router.post("/users", async (req, res) => {
     newUser
       .save()
       .then(() => {
-        res.cookie("session", session_id);
+        res.set("session", session_id);
+        res.set("Access-Control-Expose-Headers", "session");
         res.status(200).send();
       })
       .catch((err) => {
@@ -78,7 +80,6 @@ router.post("/sign-in", async (req, res) => {
 });
 
 router.get("/sign-out", ensureAuthenticated, (req, res) => {
-  res.clearCookie("session");
   res.status(200).send();
 });
 
