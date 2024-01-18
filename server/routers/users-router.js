@@ -65,7 +65,8 @@ router.post("/sign-in", async (req, res) => {
       user
         .save()
         .then(() => {
-          res.cookie("session", session_id);
+          res.set("session", session_id);
+          res.set("Access-Control-Expose-Headers", "session");
           res.status(200).send();
         })
         .catch(() => {
@@ -80,7 +81,15 @@ router.post("/sign-in", async (req, res) => {
 });
 
 router.get("/sign-out", ensureAuthenticated, (req, res) => {
-  res.status(200).send();
+  const session = req.get("session").replace(`"`, "").replace(`"`, "");
+  console.log(session);
+  User.findOne({ session }).then((user) => {
+    user.session = "";
+    user
+      .save()
+      .then(res.status(200).send())
+      .catch((err) => res.status(500).send(err));
+  });
 });
 
 module.exports = router;

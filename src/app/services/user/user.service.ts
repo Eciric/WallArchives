@@ -26,8 +26,14 @@ export class UserService {
   }
 
   login(user: User): Observable<any> {
-    return this.http.post('http://localhost:3002/sign-in', {
-      user,
+    const session = localStorage.getItem('session') || '';
+    return this.http.post('http://localhost:3002/sign-in', user, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        session,
+      }),
+      observe: 'response',
+      withCredentials: true,
     });
   }
 
