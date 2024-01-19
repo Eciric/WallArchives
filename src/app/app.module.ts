@@ -11,6 +11,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileControlComponent } from './components/profile/profile_control/profile_control.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     SignUpComponent,
     SignInComponent,
     ProfileComponent,
+    ProfileControlComponent,
   ],
   imports: [
     BrowserModule,
