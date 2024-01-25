@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-profile-control',
-  templateUrl: './profile_control.component.html',
-  styleUrls: ['./profile_control.component.css'],
+  templateUrl: './profile-control.component.html',
+  styleUrls: ['./profile-control.component.css'],
 })
 export class ProfileControlComponent {
   @Input() value: string = '';

@@ -6,12 +6,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
+  currentControl = 'info';
   controls = [
-    { name: 'my info', state: true },
-    { name: 'my wallpapers', state: false },
+    { value: 'info', name: 'my info', state: true },
+    { value: 'wall', name: 'my wallpapers', state: false },
   ];
   controlClicked(emitted: number): void {
     this.controls.map((control) => (control.state = false));
     this.controls[emitted].state = true;
+    this.currentControl = this.controls[emitted].value;
   }
 }

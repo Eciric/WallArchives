@@ -82,7 +82,6 @@ router.post("/sign-in", async (req, res) => {
 
 router.get("/sign-out", ensureAuthenticated, (req, res) => {
   const session = req.get("session").replace(`"`, "").replace(`"`, "");
-  console.log(session);
   User.findOne({ session }).then((user) => {
     user.session = "";
     user
