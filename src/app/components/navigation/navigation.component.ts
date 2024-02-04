@@ -22,7 +22,7 @@ export class NavigationComponent implements OnInit {
     if (this.userService.isAuthenticated()) {
       this.userService.logout().subscribe({
         next: () => {
-          this.userService.deleteSessionInfo();
+          this.userService.deleteUserInfo();
           this.isLoggedIn = false;
           this.router.navigate(['/']);
         },

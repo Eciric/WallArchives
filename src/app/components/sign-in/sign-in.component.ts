@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { UserResponse } from 'src/app/interfaces/user-response';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -35,8 +36,9 @@ export class SignInComponent {
         username: '',
       })
       .subscribe({
-        next: (response: any) => {
-          this.userService.setSessionInfo(response.headers.get('session'));
+        next: (response: UserResponse) => {
+          console.log(response);
+          this.userService.setUserInfo(response);
           this.router.navigate(['/']);
         },
         error: (e) => {
