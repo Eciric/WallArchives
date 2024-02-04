@@ -5,6 +5,23 @@ const bcrypt = require("bcryptjs");
 const uuid = require("uuid").v4;
 const { ensureAuthenticated } = require("../config/auth");
 
+router.get("/user/:uid", async (req, res) => {
+  const uid = req.params.uid;
+
+  const user = await User.findOne({ _id: uid });
+  if (user) {
+    res.status(200).send({
+      uid: user._id,
+      email: user.email,
+      username: user.username,
+      date: user.date,
+      session: session_id,
+    });
+  } else {
+    res.status(400).send();
+  }
+});
+
 router.post("/users", async (req, res) => {
   const { email, username, password } = req.body;
   if (!email || !username || !password) {
@@ -42,10 +59,14 @@ router.post("/users", async (req, res) => {
     newUser.password = hash;
     newUser
       .save()
-      .then(() => {
-        res.set("session", session_id);
-        res.set("Access-Control-Expose-Headers", "session");
-        res.status(200).send();
+      .then((user) => {
+        res.status(200).send({
+          uid: user._id,
+          email: user.email,
+          username: user.username,
+          date: user.date,
+          session: session_id,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -65,9 +86,13 @@ router.post("/sign-in", async (req, res) => {
       user
         .save()
         .then(() => {
-          res.set("session", session_id);
-          res.set("Access-Control-Expose-Headers", "session");
-          res.status(200).send();
+          res.status(200).send({
+            uid: user._id,
+            email: user.email,
+            username: user.username,
+            date: user.date,
+            session: session_id,
+          });
         })
         .catch(() => {
           res.status(500).send({ error: "Failed to authenticate" });
@@ -81,7 +106,10 @@ router.post("/sign-in", async (req, res) => {
 });
 
 router.get("/sign-out", ensureAuthenticated, (req, res) => {
-  const session = req.get("session").replace(`"`, "").replace(`"`, "");
+  let session = req.get("session");
+  console.log(session);
+  session = session.substring(1, session.length - 1);
+  console.log(session);
   User.findOne({ session }).then((user) => {
     user.session = "";
     user
