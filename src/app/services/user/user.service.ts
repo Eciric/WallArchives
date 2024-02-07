@@ -13,26 +13,20 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   public isAuthenticated(): Boolean {
-    let userData = localStorage.getItem('session');
-
-    if (userData == undefined || userData == 'undefined') {
-      this.deleteUserInfo();
-      return false;
-    }
-
-    if (userData && JSON.parse(userData)) {
+    if (this.getUserInfo()) {
       return true;
     }
-
     return false;
   }
 
   public setUserInfo(user: UserResponse) {
-    localStorage.setItem('userInfo', JSON.stringify({ ...user }));
+    localStorage.setItem('userInfo', JSON.stringify(user));
   }
 
-  public getUserInfo(): UserResponse {
-    return JSON.parse(localStorage.getItem('userInfo') || '');
+  public getUserInfo(): UserResponse | null {
+    let user = localStorage.getItem('userInfo');
+    if (user) return JSON.parse(user);
+    else return null;
   }
 
   public deleteUserInfo() {
@@ -50,7 +44,7 @@ export class UserService {
   logout(): Observable<any> {
     let user = this.getUserInfo();
     return this.http.get(`${this.userApi}/sign-out`, {
-      headers: new HttpHeaders({ session: user.session }),
+      headers: new HttpHeaders({ session: user?.session || '' }),
     });
   }
 
