@@ -1,5 +1,6 @@
+<app-navigation></app-navigation>
+
 <div class="flex flex-col h-full w-full">
-  <app-navigation></app-navigation>
   <div
     class="w-full flex-1 mx-auto flex flex-col items-center bg-violet-950 bg-opacity-20"
   >
@@ -15,7 +16,10 @@
         <div
           class="w-40 h-full bg-gray-950 bg-opacity-50 text-white text-center"
         >
-          <h1 class="text-xl mt-20 font-semibold">Username</h1>
+          <div class="h-20 w-40"></div>
+          <h1 class="text-xl mt-5 capitalize font-semibold">
+            {{ user.username || "Username" }}
+          </h1>
           <div class="controls">
             <ul
               role="list"
@@ -31,11 +35,13 @@
             </ul>
           </div>
         </div>
-        <div class="h-full flex-1 flex flex-col justify-center items-center">
-          <div *ngIf="currentControl == 'info'">
-            <h1 class="text-white text-2xl">
-              No user information to see here yet
-            </h1>
+        <div class="h-full flex-1 flex text-white p-12">
+          <div *ngIf="currentControl == 'info'" class="gap-5 md:flex">
+            <div>
+              <span class="font-bold">Date created:</span> {{ user.date }}
+            </div>
+            <div><span class="font-bold">Email:</span> {{ user.email }}</div>
+            <div><span class="font-bold">User id:</span> {{ user.uid }}</div>
           </div>
           <div *ngIf="currentControl == 'wall'" class="text-center">
             <h1 class="text-white text-2xl">Nothing to see here yet</h1>
