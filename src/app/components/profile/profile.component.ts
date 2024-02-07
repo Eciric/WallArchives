@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { User } from 'src/app/interfaces/user';
+import { Router } from '@angular/router';
+import { UserResponse } from 'src/app/interfaces/user-response';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -8,13 +9,15 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private userService: UserService) {}
-  user: User = {} as User;
+  user: UserResponse = {} as UserResponse;
   currentControl = 'info';
   controls = [
     { value: 'info', name: 'my info', state: true },
     { value: 'wall', name: 'my wallpapers', state: false },
   ];
+
+  constructor(private userService: UserService, private router: Router) {}
+
   controlClicked(emitted: number): void {
     this.controls.map((control) => (control.state = false));
     this.controls[emitted].state = true;
@@ -24,6 +27,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     let user = this.userService.getUserInfo();
     if (user) {
+      this.user = user;
+    } else {
+      this.router.navigate(['/']);
     }
   }
 }
