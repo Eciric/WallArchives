@@ -105,18 +105,20 @@ router.post("/sign-in", async (req, res) => {
   }
 });
 
-router.get("/sign-out", ensureAuthenticated, (req, res) => {
+router.get("/sign-out", ensureAuthenticated, async (req, res) => {
   let session = req.get("session");
   console.log(session);
-  session = session.substring(1, session.length - 1);
-  console.log(session);
-  User.findOne({ session }).then((user) => {
+  let user = await User.findOne({ session }).exec();
+  console.log(user);
+  if (user) {
     user.session = "";
     user
       .save()
       .then(res.status(200).send())
       .catch((err) => res.status(500).send(err));
-  });
+  } else {
+    res.status(400).send();
+  }
 });
 
 module.exports = router;
