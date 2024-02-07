@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
     this.wallService.fetchAllImages().subscribe({
       next: (imageURLS) => {
         this.imageURLS = imageURLS;
-        console.log(this.imageURLS);
       },
     });
   }

@@ -37,7 +37,6 @@ export class SignInComponent {
       })
       .subscribe({
         next: (response: UserResponse) => {
-          console.log(response);
           this.userService.setUserInfo(response);
           this.router.navigate(['/']);
         },
