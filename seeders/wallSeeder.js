@@ -56,9 +56,7 @@ mongoose
   .then(() => {
     console.log("Wall seeder connected to db");
     walls.map(async (wall, index) => {
-      console.log("Saving wall: ", wall.title);
       await wall.save();
-      console.log("Saved wall: ", wall.title);
       if (index == walls.length - 1) {
         console.log("Finished seeding walls");
         process.exit();

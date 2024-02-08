@@ -107,9 +107,7 @@ router.post("/sign-in", async (req, res) => {
 
 router.get("/sign-out", ensureAuthenticated, async (req, res) => {
   let session = req.get("session");
-  console.log(session);
   let user = await User.findOne({ session }).exec();
-  console.log(user);
   if (user) {
     user.session = "";
     user
