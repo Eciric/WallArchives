@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const User = require("./User");
 
 //Wall schema
 const wallSchema = new mongoose.Schema({
