@@ -1,7 +1,20 @@
 <app-navigation></app-navigation>
 
-<div class="flex flex-wrap my-24 w-10/12 mx-auto h-100 gap-3">
-  <div *ngFor="let image of imageURLS" tabindex="0" class="img-wrapper">
-    <img [src]="api + '/' + image" alt="Image" />
+<div class="w-10/12 my-12 mx-auto">
+  <div class="text-white text-center text-lg">
+    <h1 class="text-3xl font-semibold">Welcome to WallArchives!</h1>
+    <p class="mt-4">
+      WallArchives is a website created to archive many different wallpapers,
+      feel free to create an account and add yours.
+    </p>
+    <p>
+      Below are some of the most recent added wallpapers, use the explore tool
+      to search the site for others.
+    </p>
+  </div>
+  <div class="flex flex-wrap w-full gap-3 mt-24">
+    <div *ngFor="let image of imageURLS" tabindex="0" class="img-wrapper">
+      <img [src]="api + '/' + image" alt="Image" />
+    </div>
   </div>
 </div>
