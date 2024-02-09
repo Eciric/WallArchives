@@ -13,6 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileControlComponent } from './components/profile/profile-control/profile-control.component';
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
+import { ExploreComponent } from './components/explore/explore.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { ProfileInfoComponent } from './components/profile/profile-info/profile-
     ProfileComponent,
     ProfileControlComponent,
     ProfileInfoComponent,
+    ExploreComponent,
+    AboutComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
