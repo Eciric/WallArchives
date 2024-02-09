@@ -45,6 +45,55 @@ const walls = [
     tags: "sky, tree, forest, urban, colorful",
     date: Date.now(),
   }),
+  new Wall({
+    _uid: "65c3f07e1b69e02d19a415fb",
+    title: "A test wallpaper 6",
+    path: "/test6.png",
+    tags: "sky, tree, forest, urban, colorful",
+    date: Date.now(),
+  }),
+  new Wall({
+    _uid: "65c3f07e1b69e02d19a415fb",
+    title: "A test wallpaper 7",
+    path: "/test7.png",
+    tags: "sky, tree, forest, urban, colorful",
+    date: Date.now(),
+  }),
+  new Wall({
+    _uid: "65c3f07e1b69e02d19a415fb",
+    title: "A test wallpaper 8",
+    path: "/test8.png",
+    tags: "sky, tree, forest, urban, colorful",
+    date: Date.now(),
+  }),
+  new Wall({
+    _uid: "65c3f07e1b69e02d19a415fb",
+    title: "A test wallpaper 9",
+    path: "/test9.png",
+    tags: "sky, tree, forest, urban, colorful",
+    date: Date.now(),
+  }),
+  new Wall({
+    _uid: "65c3f07e1b69e02d19a415fb",
+    title: "A test wallpaper 10",
+    path: "/test10.png",
+    tags: "sky, tree, forest, urban, colorful",
+    date: Date.now(),
+  }),
+  new Wall({
+    _uid: "65c3f07e1b69e02d19a415fb",
+    title: "A test wallpaper 11",
+    path: "/test11.png",
+    tags: "sky, tree, forest, urban, colorful",
+    date: Date.now(),
+  }),
+  new Wall({
+    _uid: "65c3f07e1b69e02d19a415fb",
+    title: "A test wallpaper 12",
+    path: "/test12.png",
+    tags: "sky, tree, forest, urban, colorful",
+    date: Date.now(),
+  }),
 ];
 
 mongoose
