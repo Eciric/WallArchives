@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignUpComponent } from './sign-up.component';
+import { NavigationComponent } from '../navigation/navigation.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -8,7 +11,8 @@ describe('SignUpComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SignUpComponent]
+      imports: [HttpClientModule, ReactiveFormsModule],
+      declarations: [SignUpComponent, NavigationComponent],
     });
     fixture = TestBed.createComponent(SignUpComponent);
     component = fixture.componentInstance;

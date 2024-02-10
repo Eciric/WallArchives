@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavigationComponent } from './navigation.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -8,7 +9,8 @@ describe('NavigationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NavigationComponent]
+      imports: [HttpClientModule],
+      declarations: [NavigationComponent],
     });
     fixture = TestBed.createComponent(NavigationComponent);
     component = fixture.componentInstance;
