@@ -23,14 +23,19 @@
           </div>
           <div class="pb-5 absolute bottom-0 left-1/2 -translate-x-1/2">
             <p class="text-lg">Date added</p>
-            <p class="text-md">{{ wall.date }}</p>
+            <p class="text-md">{{ wall ? wall.date : "error getting date" }}</p>
           </div>
         </div>
       </div>
       <div class="flex-1">
         <div class="flex flex-col gap-5">
-          <h1 class="text-3xl text-white">{{ wall.title }}</h1>
-          <img [src]="api + '/' + wall.path" alt="Image" />
+          <h1 class="text-3xl text-white">
+            {{ wall ? wall.title : "error getting title" }}
+          </h1>
+          <img
+            src="{{ api + '/' + (wall ? wall.path : '404.png') }}"
+            alt="Image"
+          />
         </div>
       </div>
     </div>

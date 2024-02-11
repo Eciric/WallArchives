@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WallComponent } from './wall.component';
+import { NavigationComponent } from '../navigation/navigation.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('WallComponent', () => {
   let component: WallComponent;
@@ -8,7 +11,8 @@ describe('WallComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [WallComponent]
+      imports: [HttpClientModule, RouterTestingModule],
+      declarations: [WallComponent, NavigationComponent],
     });
     fixture = TestBed.createComponent(WallComponent);
     component = fixture.componentInstance;
