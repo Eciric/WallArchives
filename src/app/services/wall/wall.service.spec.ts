@@ -49,7 +49,7 @@ describe('WallService', () => {
   it('should return the expected wallpapers', () => {
     httpSpy.get.and.nextWith(fakeWalls);
 
-    service.fetchAllImages().subscribe((walls) => {
+    service.getWalls().subscribe((walls) => {
       expect(walls).toHaveSize(fakeWalls.length);
       walls.forEach((wall, index) => {
         expect(isEqual(wall, fakeWalls[index])).toBeTruthy();
