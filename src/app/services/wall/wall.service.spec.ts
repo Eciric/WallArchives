@@ -42,6 +42,10 @@ describe('WallService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('httpSpy should be created', () => {
+    expect(httpSpy).toBeTruthy();
+  });
+
   it('should return the expected wallpapers', () => {
     httpSpy.get.and.nextWith(fakeWalls);
 
