@@ -8,7 +8,6 @@ const uploadsFolder = `${path.join(__dirname, "..", "..")}/public/uploads`;
 
 router.get("/walls", async (req, res) => {
   const walls = await Wall.find();
-  console.log(walls);
   if (walls) {
     res.status(200).send(walls);
   } else {
@@ -16,8 +15,13 @@ router.get("/walls", async (req, res) => {
   }
 });
 
-router.get("/walls/:id", (req, res) => {
-  res.status(200).send("test" + id + ".png");
+router.get("/walls/:id", async (req, res) => {
+  const wall = await Wall.findById(req.params.id);
+  if (wall) {
+    res.status(200).send(wall);
+  } else {
+    res.status(404).send();
+  }
 });
 
 module.exports = router;
