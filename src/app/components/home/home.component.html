@@ -14,7 +14,11 @@
   </div>
   <div class="flex flex-wrap w-full gap-3 mt-24">
     <div *ngFor="let image of images" tabindex="0" class="img-wrapper">
-      <img [src]="api + '/' + image.path" alt="Image" />
+      <img
+        [src]="api + '/' + image.path"
+        alt="Image"
+        (click)="wallClicked(image)"
+      />
     </div>
   </div>
 </div>
