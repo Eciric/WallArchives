@@ -16,6 +16,7 @@ import { ProfileInfoComponent } from './components/profile/profile-info/profile-
 import { ExploreComponent } from './components/explore/explore.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { WallComponent } from './components/wall/wall.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ContactComponent } from './components/contact/contact.component';
     ExploreComponent,
     AboutComponent,
     ContactComponent,
+    WallComponent,
   ],
   imports: [
     BrowserModule,
