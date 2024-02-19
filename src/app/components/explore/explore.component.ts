@@ -12,5 +12,7 @@ export class ExploreComponent {
   images: Wall[] = [];
   api: string = environment.apiUrl + '/uploads';
 
-  constructor(private wallService: WallService) {}
+  wallsEmitted(walls: Wall[]) {
+    this.images = walls;
+  }
 }

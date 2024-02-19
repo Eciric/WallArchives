@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.wallService.getWalls().subscribe({
       next: (images: Wall[]) => {
+        console.log(images);
         this.images = images;
       },
     });
