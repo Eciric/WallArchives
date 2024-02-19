@@ -5,7 +5,8 @@
     >
       <input
         type="text"
-        name="search"
+        [name]="search"
+        (keydown.enter)="onKeydown($event)"
         id="search"
         placeholder="Search..."
         class="w-full p-2 text-white bg-transparent shadow-lg bg-opacity-50"
