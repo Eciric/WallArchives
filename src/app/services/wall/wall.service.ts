@@ -12,11 +12,15 @@ export class WallService {
 
   constructor(private http: HttpClient) {}
 
+  getWall(wallId: string): Observable<Wall> {
+    return this.http.get<Wall>(`${this.api}/walls/${wallId}`);
+  }
+
   getWalls(): Observable<Wall[]> {
     return this.http.get<Wall[]>(`${this.api}/walls`);
   }
 
-  getWall(wallId: string): Observable<Wall> {
-    return this.http.get<Wall>(`${this.api}/walls/${wallId}`);
+  getWallsByKeyword(keyword: string): Observable<Wall[]> {
+    return this.http.get<Wall[]>(`${this.api}/walls/${keyword}`);
   }
 }
