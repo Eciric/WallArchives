@@ -3,6 +3,6 @@ export interface Wall {
   _uid: string;
   title: string;
   path: string;
-  tags: string;
+  tags: string[];
   date: Date;
 }
