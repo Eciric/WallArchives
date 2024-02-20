@@ -6,19 +6,23 @@ const uuid = require("uuid").v4;
 const { ensureAuthenticated } = require("../config/auth");
 
 router.get("/user/:uid", async (req, res) => {
-  const uid = req.params.uid;
-
-  const user = await User.findOne({ _id: uid });
-  if (user) {
-    res.status(200).send({
-      uid: user._id,
-      email: user.email,
-      username: user.username,
-      date: user.date,
-      session: session_id,
-    });
-  } else {
-    res.status(400).send();
+  try {
+    const uid = req.params.uid;
+    const user = await User.findOne({ _id: uid });
+    if (user) {
+      res.status(200).send({
+        uid: user._id,
+        email: user.email,
+        username: user.username,
+        date: user.date,
+        session: session_id,
+      });
+    } else {
+      res.status(400).send();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
   }
 });
 
