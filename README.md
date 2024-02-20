@@ -1,5 +1,7 @@
 # WallArchives
 
+![Home page](./repo_images/home.png "Home")
+
 This is a hobby project created with the purpose of practicing fullstack web dev. It allows for uploading wallpapers,
 there's many similar websites like this, for example: https://wallhaven.cc/
 
@@ -20,7 +22,3 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## ----------------------
-
-![Home page](./repo_images/home.png "Home")
