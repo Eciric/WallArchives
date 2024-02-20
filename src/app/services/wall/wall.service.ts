@@ -21,6 +21,6 @@ export class WallService {
   }
 
   getWallsByKeyword(keyword: string): Observable<Wall[]> {
-    return this.http.get<Wall[]>(`${this.api}/walls/${keyword}`);
+    return this.http.get<Wall[]>(`${this.api}/walls/keyword/${keyword}`);
   }
 }
