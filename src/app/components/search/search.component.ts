@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Wall } from 'src/app/interfaces/wall';
 import { WallService } from 'src/app/services/wall/wall.service';
 
@@ -8,19 +8,20 @@ import { WallService } from 'src/app/services/wall/wall.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
-  @Input() search!: string;
-  @Output() wallEmitter!: EventEmitter<Wall[]>;
+  search: string = '';
+  @Output() wallsEmitter: EventEmitter<Wall[]> = new EventEmitter();
 
   constructor(private wallService: WallService) {}
 
   onKeydown(event: Event) {
     event.preventDefault();
-    const target = event.target as HTMLInputElement;
-    this.wallService.getWallsByKeyword(target.value).subscribe({
+    this.wallService.getWallsByKeyword(this.search).subscribe({
       next: (walls: Wall[]) => {
-        this.wallEmitter.emit(walls);
+        this.wallsEmitter.emit(walls);
       },
-      error: (err: any) => {},
+      error: (err: any) => {
+        console.error('Failed getting walls by keyword: ', err);
+      },
     });
   }
 }

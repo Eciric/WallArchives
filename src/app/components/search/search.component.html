@@ -4,12 +4,14 @@
       class="flex gap-4 justify-center items-center bg-violet-800 rounded m-auto w-1/2"
     >
       <input
-        type="text"
-        [name]="search"
-        (keydown.enter)="onKeydown($event)"
         id="search"
+        type="text"
+        name="search"
+        [(ngModel)]="search"
+        (keydown.enter)="onKeydown($event)"
         placeholder="Search..."
         class="w-full p-2 text-white bg-transparent shadow-lg bg-opacity-50"
+        required
       />
       <div class="vertical-separator"></div>
       <span
@@ -18,6 +20,5 @@
         search
       </span>
     </div>
-    <span class="material-symbols-outlined"> filter_alt </span>
   </form>
 </div>
