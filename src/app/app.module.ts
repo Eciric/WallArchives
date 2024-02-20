@@ -9,7 +9,7 @@ import { SearchComponent } from './components/search/search.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileControlComponent } from './components/profile/profile-control/profile-control.component';
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
@@ -39,6 +39,7 @@ import { WallComponent } from './components/wall/wall.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
