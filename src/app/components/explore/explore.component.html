@@ -2,9 +2,9 @@
   <app-navigation></app-navigation>
 
   <div class="w-10/12 mx-auto my-24 flex-1 flex flex-col">
-    <app-search></app-search>
+    <app-search (wallsEmitter)="onWallsEmitted($event)"></app-search>
     <div
-      class="w-full text-center flex-1 text-white flex justify-center items-center"
+      class="w-full flex-1 text-white text-center flex justify-center items-center"
     >
       <div *ngIf="!images.length">
         <h1 class="text-xl font-semibold">
@@ -13,7 +13,7 @@
       </div>
 
       <div *ngIf="images.length">
-        <div class="flex flex-wrap w-full gap-3">
+        <div class="flex flex-wrap w-full gap-3 mt-5">
           <div *ngFor="let image of images" tabindex="0" class="img-wrapper">
             <img [src]="api + '/' + image.path" alt="Image" />
           </div>

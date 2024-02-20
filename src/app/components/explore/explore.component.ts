@@ -12,7 +12,7 @@ export class ExploreComponent {
   images: Wall[] = [];
   api: string = environment.apiUrl + '/uploads';
 
-  wallsEmitted(walls: Wall[]) {
+  onWallsEmitted(walls: Wall[]) {
     this.images = walls;
   }
 }
