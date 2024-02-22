@@ -4,9 +4,19 @@ const Wall = require("../../models/Wall");
 
 router.get("/walls", async (req, res) => {
   try {
-    const walls = await Wall.find();
+    const { page = 1, limit = 10 } = req.query;
+    const walls = await Wall.find()
+      .limit(limit * 1)
+      .skip((page - 1) * limit);
+
+    const count = await Wall.countDocuments();
     if (walls) {
-      res.status(200).json(walls);
+      res.status(200).json({
+        currentPage: page,
+        limit,
+        totalPages: Math.ceil(count / limit),
+        walls,
+      });
     } else {
       res.status(400).send();
     }
@@ -36,17 +46,30 @@ router.get("/walls/:id", async (req, res) => {
 
 router.get("/walls/keyword/:keyword", async (req, res) => {
   try {
+    const { page = 1, limit = 10 } = req.query;
     let walls;
+    let count;
     if (req.params.keyword == "all") {
-      walls = await Wall.find();
+      walls = await Wall.find()
+        .limit(limit * 1)
+        .skip((page - 1) * limit);
+      count = await Wall.countDocuments();
     } else {
       walls = await Wall.find({
+        tags: { $in: req.params.keyword },
+      });
+      count = await Wall.countDocuments({
         tags: { $in: req.params.keyword },
       });
     }
 
     if (walls) {
-      res.status(200).json(walls);
+      res.status(200).json({
+        currentPage: page,
+        limit,
+        totalPages: Math.ceil(count / limit),
+        walls,
+      });
     } else {
       res.status(404).send("Resource not found");
     }
