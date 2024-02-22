@@ -8,6 +8,7 @@ import { WallService } from 'src/app/services/wall/wall.service';
   styleUrls: ['./explore.component.css'],
 })
 export class ExploreComponent {
+  search: string = '';
   wallResponses: WallResponse[] = [];
   constructor(private wallService: WallService) {}
 
@@ -16,6 +17,18 @@ export class ExploreComponent {
   }
 
   onEndReached(wallResponse: WallResponse) {
-    this.wallService.getWalls(wallResponse.currentPage + 1, wallResponse.limit);
+    if (wallResponse.currentPage >= wallResponse.totalPages) return;
+
+    this.wallService
+      .getWallsByKeyword(
+        this.search,
+        wallResponse.currentPage + 1,
+        wallResponse.limit
+      )
+      .subscribe({
+        next: (response: WallResponse) => {
+          this.wallResponses.push(response);
+        },
+      });
   }
 }

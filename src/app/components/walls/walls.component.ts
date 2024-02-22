@@ -1,10 +1,12 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
+  Inject,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -22,13 +24,30 @@ export class WallsComponent implements AfterViewInit {
   @Input() wallResponse!: WallResponse;
   @Output() endReached: EventEmitter<WallResponse> = new EventEmitter();
   @ViewChild('wallContainer') wallContainer!: ElementRef;
+  bottomReached: boolean = false;
   api: string = environment.apiUrl + '/uploads';
 
-  constructor(private router: Router) {}
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    private router: Router
+  ) {}
 
   ngAfterViewInit(): void {
-    //TODO: Create an event listener on wallContainer and check if end of div reached,
-    //then emit using endReached event emitter.
+    this._document.body!.addEventListener('scroll', () => this.onScroll());
+  }
+
+  ngOnDestroy(): void {
+    this._document.body!.removeEventListener('scroll', () => this.onScroll());
+  }
+
+  onScroll(): void {
+    let container: HTMLElement = this.wallContainer.nativeElement;
+
+    var rect = container.getBoundingClientRect();
+    if (rect.bottom <= window.innerHeight && !this.bottomReached) {
+      this.bottomReached = true;
+      this.endReached.emit(this.wallResponse);
+    }
   }
 
   wallClicked(image: Wall): void {

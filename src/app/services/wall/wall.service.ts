@@ -26,7 +26,15 @@ export class WallService {
     );
   }
 
-  getWallsByKeyword(keyword: string): Observable<WallResponse> {
-    return this.http.get<WallResponse>(`${this.api}/walls/keyword/${keyword}`);
+  getWallsByKeyword(
+    keyword: string = 'all',
+    currentPage: number = 1,
+    limit: number = 10
+  ): Observable<WallResponse> {
+    keyword = !keyword.length ? 'all' : keyword;
+    console.log('byK', keyword, currentPage, limit);
+    return this.http.get<WallResponse>(
+      `${this.api}/walls/keyword/${keyword}?page=${currentPage}&limit=${limit}`
+    );
   }
 }

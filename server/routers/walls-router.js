@@ -12,8 +12,8 @@ router.get("/walls", async (req, res) => {
     const count = await Wall.countDocuments();
     if (walls) {
       res.status(200).json({
-        currentPage: page,
-        limit,
+        currentPage: Number(page),
+        limit: Number(limit),
         totalPages: Math.ceil(count / limit),
         walls,
       });
@@ -65,8 +65,8 @@ router.get("/walls/keyword/:keyword", async (req, res) => {
 
     if (walls) {
       res.status(200).json({
-        currentPage: page,
-        limit,
+        currentPage: Number(page),
+        limit: Number(limit),
         totalPages: Math.ceil(count / limit),
         walls,
       });

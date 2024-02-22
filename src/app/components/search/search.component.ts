@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Wall } from 'src/app/interfaces/wall';
 import { WallResponse } from 'src/app/interfaces/wall-response';
 import { WallService } from 'src/app/services/wall/wall.service';
@@ -9,7 +9,7 @@ import { WallService } from 'src/app/services/wall/wall.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
-  search: string = '';
+  @Input() search!: string;
   @Output() wallsEmitter: EventEmitter<WallResponse> = new EventEmitter();
 
   constructor(private wallService: WallService) {}
