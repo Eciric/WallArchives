@@ -17,6 +17,7 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { WallComponent } from './components/wall/wall.component';
+import { WallsComponent } from './components/walls/walls.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { WallComponent } from './components/wall/wall.component';
     AboutComponent,
     ContactComponent,
     WallComponent,
+    WallsComponent,
   ],
   imports: [
     BrowserModule,

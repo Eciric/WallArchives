@@ -1,0 +1,20 @@
+<div class="w-full mt-24 flex justify-between">
+  <p class="text-gray-400">Displaying {{ wallResponse.walls.length }} images</p>
+  <p class="text-gray-400">
+    Page {{ wallResponse.currentPage }} / {{ wallResponse.totalPages }}
+  </p>
+</div>
+
+<div #wallContainer class="flex flex-wrap w-full gap-3 mt-2">
+  <div
+    *ngFor="let image of wallResponse.walls"
+    tabindex="0"
+    class="img-wrapper"
+  >
+    <img
+      [src]="api + '/' + image.path"
+      alt="Image"
+      (click)="wallClicked(image)"
+    />
+  </div>
+</div>
