@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Wall } from 'src/app/interfaces/wall';
+import { WallResponse } from 'src/app/interfaces/wall-response';
 import { WallService } from 'src/app/services/wall/wall.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-explore',
@@ -9,10 +8,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./explore.component.css'],
 })
 export class ExploreComponent {
-  images: Wall[] = [];
-  api: string = environment.apiUrl + '/uploads';
+  wallResponses: WallResponse[] = [];
+  constructor(private wallService: WallService) {}
 
-  onWallsEmitted(walls: Wall[]) {
-    this.images = walls;
+  onWallsEmitted(wallResponse: WallResponse) {
+    this.wallResponses = [wallResponse];
+  }
+
+  onEndReached(wallResponse: WallResponse) {
+    this.wallService.getWalls(wallResponse.currentPage + 1, wallResponse.limit);
   }
 }

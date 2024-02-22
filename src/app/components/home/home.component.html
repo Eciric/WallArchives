@@ -12,13 +12,5 @@
       to search the site for others.
     </p>
   </div>
-  <div class="flex flex-wrap w-full gap-3 mt-24">
-    <div *ngFor="let image of images" tabindex="0" class="img-wrapper">
-      <img
-        [src]="api + '/' + image.path"
-        alt="Image"
-        (click)="wallClicked(image)"
-      />
-    </div>
-  </div>
+  <app-walls [wallResponse]="wallResponse"></app-walls>
 </div>
