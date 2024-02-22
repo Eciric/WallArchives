@@ -7,7 +7,7 @@ there's many similar websites like this, for example: https://wallhaven.cc/
 
 ## How to run
 
-Use `npm run dev` to run the angular development server and `npm run server` to start the express.js backend.
+Use `npm run start` to run the angular development server and `npm run server` to start the express.js backend.
 
 ## Seeding
 
