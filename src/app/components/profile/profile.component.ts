@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   user: UserResponse = {} as UserResponse;
   currentControl = 'info';
   controls = [
@@ -22,14 +22,5 @@ export class ProfileComponent implements OnInit {
     this.controls.map((control) => (control.state = false));
     this.controls[emitted].state = true;
     this.currentControl = this.controls[emitted].value;
-  }
-
-  ngOnInit(): void {
-    let user = this.userService.getUserInfo();
-    if (user) {
-      this.user = user;
-    } else {
-      this.router.navigate(['/']);
-    }
   }
 }
