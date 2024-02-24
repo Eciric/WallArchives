@@ -57,12 +57,13 @@ router.get("/walls/keyword/:keyword", async (req, res) => {
     } else {
       walls = await Wall.find({
         tags: { $in: req.params.keyword },
-      });
+      })
+        .limit(limit * 1)
+        .skip((page - 1) * limit);
       count = await Wall.countDocuments({
         tags: { $in: req.params.keyword },
       });
     }
-
     if (walls) {
       res.status(200).json({
         currentPage: Number(page),
