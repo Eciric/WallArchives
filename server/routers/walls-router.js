@@ -1,6 +1,18 @@
 const express = require("express");
+const multer = require("multer");
 const router = express.Router();
 const Wall = require("../../models/Wall");
+const path = require("path");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/");
+  },
+  filename: function (req, file, cb) {
+    const finalName = Date.now() + path.extname(file.originalname);
+    cb(null, finalName);
+  },
+});
+const upload = multer({ storage: storage });
 
 router.get("/walls", async (req, res) => {
   try {
@@ -19,6 +31,28 @@ router.get("/walls", async (req, res) => {
       });
     } else {
       res.status(400).send();
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+router.post("/walls", upload.single("image"), async (req, res) => {
+  try {
+    let newWall = JSON.parse(req.body.wall);
+    console.log(req.body);
+    let createdWall = await Wall.create({
+      _uid: req.body._uid,
+      title: newWall.title,
+      tags: newWall.tags,
+      path: "/" + req.file.filename,
+      date: Date.now(),
+    });
+    if (createdWall) {
+      res.status(200).send(createdWall);
+    } else {
+      res.status(500).send("Internal server error, failed to create document");
     }
   } catch (error) {
     console.error(error);
