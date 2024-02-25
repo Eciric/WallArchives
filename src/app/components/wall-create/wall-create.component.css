@@ -1,0 +1,12 @@
+input[type="file"]::file-selector-button {
+  cursor: pointer;
+  border: 0;
+  padding: 8px;
+  background-color: rgb(109 40 217);
+  border-radius: 8px;
+  color: white;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: rgb(124 58 237);
+}
