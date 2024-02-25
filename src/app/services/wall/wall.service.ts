@@ -32,9 +32,16 @@ export class WallService {
     limit: number = 10
   ): Observable<WallResponse> {
     keyword = !keyword.length ? 'all' : keyword;
-    console.log('byK', keyword, currentPage, limit);
     return this.http.get<WallResponse>(
       `${this.api}/walls/keyword/${keyword}?page=${currentPage}&limit=${limit}`
     );
+  }
+
+  addWall(wall: Wall, image: File, uid: string): Observable<Wall> {
+    let formData = new FormData();
+    formData.append('wall', JSON.stringify(wall));
+    formData.append('image', image);
+    formData.append('_uid', uid);
+    return this.http.post<Wall>(`${this.api}/walls`, formData);
   }
 }

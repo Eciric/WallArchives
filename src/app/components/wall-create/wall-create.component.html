@@ -44,8 +44,9 @@
       <input type="file" class="text-white mb-4" (change)="addImage($event)" />
       <img *ngIf="imageSrc" [src]="imageSrc" alt="image preview" />
       <button
-        type="submit"
+        type="button"
         class="px-8 py-4 mt-6 text-white bg-violet-700 hover:bg-violet-600 rounded-lg"
+        (click)="onSubmit()"
       >
         Archive wallpaper!
       </button>
