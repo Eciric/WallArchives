@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const uuid = require("uuid").v4;
 const { ensureAuthenticated } = require("../config/auth");
 
-router.get("/user/:uid", async (req, res) => {
+router.get("/users/:uid", async (req, res) => {
   try {
     const uid = req.params.uid;
     const user = await User.findOne({ _id: uid });
@@ -15,7 +15,7 @@ router.get("/user/:uid", async (req, res) => {
         email: user.email,
         username: user.username,
         date: user.date,
-        session: session_id,
+        session: user.session,
       });
     } else {
       res.status(400).send();
