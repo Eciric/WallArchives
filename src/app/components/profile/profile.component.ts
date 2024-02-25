@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   user: UserResponse = {} as UserResponse;
   currentControl = 'info';
   controls = [
@@ -17,6 +17,10 @@ export class ProfileComponent {
   ];
 
   constructor(private userService: UserService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.user = this.userService.getUserInfo() || ({} as UserResponse);
+  }
 
   controlClicked(emitted: number): void {
     this.controls.map((control) => (control.state = false));

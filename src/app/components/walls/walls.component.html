@@ -1,4 +1,4 @@
-<div class="w-full mt-24 flex justify-between">
+<div *ngIf="showStats" class="w-full mt-24 flex justify-between">
   <p class="text-gray-400">Displaying {{ wallResponse.walls.length }} images</p>
   <p class="text-gray-400">
     Page {{ wallResponse.currentPage }} / {{ wallResponse.totalPages }}

@@ -1,7 +1,7 @@
 <app-navigation></app-navigation>
 
 <div class="w-10/12 my-12 mx-auto">
-  <div class="text-white text-center text-lg">
+  <div class="text-white text-center text-lg mb-24">
     <h1 class="text-3xl font-semibold">Welcome to WallArchives!</h1>
     <p class="mt-4">
       WallArchives is a website created to archive many different wallpapers,
@@ -12,5 +12,5 @@
       to search the site for others.
     </p>
   </div>
-  <app-walls [wallResponse]="wallResponse"></app-walls>
+  <app-walls [wallResponse]="wallResponse" [showStats]="false"></app-walls>
 </div>

@@ -21,6 +21,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./walls.component.css'],
 })
 export class WallsComponent implements AfterViewInit {
+  @Input() showStats: boolean;
   @Input() wallResponse!: WallResponse;
   @Output() endReached: EventEmitter<WallResponse> = new EventEmitter();
   @ViewChild('wallContainer') wallContainer!: ElementRef;
@@ -30,7 +31,9 @@ export class WallsComponent implements AfterViewInit {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private router: Router
-  ) {}
+  ) {
+    this.showStats = true;
+  }
 
   ngAfterViewInit(): void {
     this._document.body!.addEventListener('scroll', () => this.onScroll());
