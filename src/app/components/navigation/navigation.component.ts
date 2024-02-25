@@ -27,7 +27,7 @@ export class NavigationComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error: (e) => {
-          console.log(e);
+          console.error(e);
         },
       });
     }

@@ -48,7 +48,6 @@ export class WallComponent implements OnInit {
       this.router.navigate(['/']);
       return;
     }
-    console.log(this.wall);
     this.wallTagsArr = this.wall.tags.map((tag) => tag.trim());
     this.userService.getUser(this.wall._uid).subscribe({
       next: (user: UserResponse) => {
