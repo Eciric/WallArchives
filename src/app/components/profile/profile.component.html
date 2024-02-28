@@ -4,10 +4,10 @@
   <div
     class="w-full flex-1 mx-auto flex flex-col items-center bg-violet-950 bg-opacity-20"
   >
-    <div class="banner | w-full h-1/6 flex items-center">
+    <div class="banner | w-full min-h-40 flex items-center relative">
       <div class="w-10/12 h-full mx-auto relative">
         <div
-          class="w-40 h-40 bg-black rounded-full absolute bottom-0 translate-y-1/2"
+          class="w-40 h-40 bg-black absolute bottom-0 translate-y-1/2 rounded-full"
         ></div>
       </div>
     </div>
@@ -41,11 +41,16 @@
             <div><span class="font-bold">Email:</span> {{ user.email }}</div>
             <div><span class="font-bold">User id:</span> {{ user.uid }}</div>
           </div>
-          <div *ngIf="currentControl == 'wall'" class="text-center">
-            <h1 class="text-white text-2xl">Nothing to see here yet</h1>
-            <a class="text-gray-300 underline mt-2" href="/wall-create"
-              >Add your first wallpaper!</a
-            >
+          <div *ngIf="currentControl == 'wall'" class="text-center mx-auto">
+            <div *ngIf="!userWallResponse?.walls?.length">
+              <h1 class="text-white text-2xl">Nothing to see here yet</h1>
+              <a class="text-gray-300 underline mt-2" href="/wall-create"
+                >Add your first wallpaper!</a
+              >
+            </div>
+            <div *ngIf="userWallResponse?.walls?.length">
+              <app-walls [wallResponse]="userWallResponse"></app-walls>
+            </div>
           </div>
         </div>
       </div>
