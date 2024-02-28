@@ -33,7 +33,17 @@ export class WallService {
   ): Observable<WallResponse> {
     keyword = !keyword.length ? 'all' : keyword;
     return this.http.get<WallResponse>(
-      `${this.api}/walls/keyword/${keyword}?page=${currentPage}&limit=${limit}`
+      `${this.api}/walls?keyword=${keyword}&page=${currentPage}&limit=${limit}`
+    );
+  }
+
+  getWallsByUID(
+    uid: string,
+    currentPage: number = 1,
+    limit: number = 10
+  ): Observable<WallResponse> {
+    return this.http.get<WallResponse>(
+      `${this.api}/walls?uid=${uid}&page=${currentPage}&limit=${limit}`
     );
   }
 
